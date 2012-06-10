@@ -461,7 +461,13 @@ begin
 
     result := true;
     SPS_AreaMaps := SPS_BitmapToMap(tmp, SPS_Accuracy);
-    SPS_Areas := SPS_SortAreas(areas);
+
+    if (surface = RUNESCAPE_SURFACE) then
+      SPS_Areas := SPS_SortAreas(areas)
+    else
+      if (surface = RUNESCAPE_OTHER) then
+        SPS_Areas := areas;
+
     tmp.free();
 
   end else
@@ -472,5 +478,4 @@ begin
   if (SPS_Debug) and (result) then
     writeln('[SPS] SPS_Setup() took '+toStr(t)+' ms. Areas: '+toStr(SPS_Areas));
 end;
-
 
